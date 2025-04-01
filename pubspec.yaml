@@ -12,6 +12,8 @@ version: 1.0.0+1
 environment:
   sdk: ^3.7.2
 
+scripts: scripts.yaml
+
 # To automatically upgrade your package dependencies to the latest versions
 # consider running `flutter pub upgrade --major-versions`.
 # To see which dependencies have newer versions available, run `flutter pub outdated`.

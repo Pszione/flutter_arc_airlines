@@ -1,0 +1,19 @@
+To easily run the following commands, you can install derry package: https://pub.dev/packages/derry
+# note: fvm is a tool that allows you to manage multiple Flutter SDKs. https://fvm.app/
+flutter: fvm flutter # flutter from path OR from fvm
+dart: fvm dart # dart from path OR from fvm
+
+analyzeBuild:
+  size: $flutter build appbundle --target-platform android-arm64 --release --analyze-size
+  result: $dart devtools --appSizeBase=aab-code-size-analysis.json
+
+analyzeMemory:
+  observatory: $flutter run -d macos --serve-observatory --profile
+
+test: $flutter test
+testCoverage:
+  - $flutter test --coverage
+  - $testCoverageReport:html
+testCoverageReport:
+  html:
+    - genhtml coverage/lcov.info -o coverage/html
