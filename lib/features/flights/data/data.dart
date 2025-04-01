@@ -1,0 +1,1 @@
+export 'models/flight_info_model.dart';
