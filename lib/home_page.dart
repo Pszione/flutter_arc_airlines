@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_arc_airlines/core/core.dart';
+
+import 'core/ui/ui.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key});
@@ -12,11 +15,13 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    final bannerHeight = MediaQuery.sizeOf(context).height * 0.22;
+    final bannerHeight = context.screenHeight * 0.22;
+    final overflowBannerGap =
+        bannerHeight - (defaultPadding * 2); // TODO: error handling
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+        backgroundColor: context.colorScheme.inversePrimary,
         title: Text('Hello World!'),
       ),
       body: Stack(
@@ -24,18 +29,48 @@ class _MyHomePageState extends State<MyHomePage> {
           Container(
             width: double.maxFinite,
             height: bannerHeight,
-            color: Colors.blue,
+            color: Colors.blue.withValues(alpha: .5),
           ),
           Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
+              spacing: defaultPadding,
               children: [
-                SizedBox(height: bannerHeight),
+                Gap(overflowBannerGap),
                 Container(
-                  margin: EdgeInsets.all(20),
-                  width: double.maxFinite,
-                  height: MediaQuery.sizeOf(context).height * 0.14,
-                  color: Colors.grey,
+                  margin: EdgeInsets.symmetric(horizontal: defaultPadding),
+                  child: Card(
+                    child: ListTile(
+                      title: Text(
+                        'Confirmation Code',
+                        style: context.textTheme.titleMedium,
+                      ),
+                      trailing: Text(
+                        'SRFEGQ', // TODO
+                        style: context.textTheme.titleMedium,
+                      ),
+                    ),
+                  ),
+                ),
+                Container(
+                  margin: EdgeInsets.symmetric(horizontal: defaultPadding),
+                  child: Card(
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        ListTile(
+                          leading: Icon(Icons.flight),
+                          title: Text('Flight'),
+                          subtitle: Text('Flight details'),
+                        ),
+                        Divider(height: 0),
+                        Padding(
+                          padding: EdgeInsets.all(defaultPadding),
+                          child: Text('Flight information goes here.'),
+                        ),
+                      ],
+                    ),
+                  ),
                 ),
               ],
             ),
