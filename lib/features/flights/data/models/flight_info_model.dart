@@ -2,11 +2,13 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter_arc_airlines/features/airlines/domain/domain.dart';
 import 'package:json_annotation/json_annotation.dart';
 
+import '../../domain/domain.dart';
+
 part 'flight_info_model.g.dart';
 
 @JsonSerializable()
 class FlightInfoModel extends Equatable {
-  final String flightNumber; // TODO: should entity with business logic
+  final FlightNumberEntity flightNumber;
   final AirlineEntity airline;
   final String departureAirport; // TODO: should entity with business logic
   final String arrivalAirport; // TODO: should entity with business logic
@@ -32,8 +34,7 @@ class FlightInfoModel extends Equatable {
     arrivalTime,
   ];
 
-  factory FlightInfoModel.fromJson(Map<String, dynamic> json) =>
-      _$FlightInfoModelFromJson(json);
+  factory FlightInfoModel.fromJson(Map<String, dynamic> json) => _$FlightInfoModelFromJson(json);
 
   Map<String, dynamic> toJson() => _$FlightInfoModelToJson(this);
 }

@@ -8,7 +8,9 @@ part of 'flight_info_model.dart';
 
 FlightInfoModel _$FlightInfoModelFromJson(Map<String, dynamic> json) =>
     FlightInfoModel(
-      flightNumber: json['flightNumber'] as String,
+      flightNumber: FlightNumberEntity.fromJson(
+        json['flightNumber'] as Map<String, dynamic>,
+      ),
       airline: AirlineEntity.fromJson(json['airline'] as Map<String, dynamic>),
       departureAirport: json['departureAirport'] as String,
       arrivalAirport: json['arrivalAirport'] as String,
@@ -18,7 +20,7 @@ FlightInfoModel _$FlightInfoModelFromJson(Map<String, dynamic> json) =>
 
 Map<String, dynamic> _$FlightInfoModelToJson(FlightInfoModel instance) =>
     <String, dynamic>{
-      'flightNumber': instance.flightNumber,
+      'flightNumber': instance.flightNumber.toJson(),
       'airline': instance.airline.toJson(),
       'departureAirport': instance.departureAirport,
       'arrivalAirport': instance.arrivalAirport,

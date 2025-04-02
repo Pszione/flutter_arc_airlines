@@ -4,6 +4,11 @@ import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   group('$FlightInfoModel', () {
+    final flightNumberJson = {
+      'airlineCode': 'TA',
+      'value': '1234',
+    };
+
     final airlineJson = {
       'id': 'AL123',
       'name': 'Test Airline',
@@ -12,7 +17,7 @@ void main() {
     };
 
     final validJson = {
-      'flightNumber': 'AB123',
+      'flightNumber': flightNumberJson,
       'airline': airlineJson,
       'departureAirport': 'JFK',
       'arrivalAirport': 'LAX',
@@ -32,7 +37,7 @@ void main() {
     test('createsInstanceFromValidJson', () {
       final model = FlightInfoModel.fromJson(validJson);
 
-      expect(model.flightNumber, 'AB123');
+      expect(model.flightNumber, FlightNumberEntity.fromJson(flightNumberJson));
       expect(model.airline, AirlineEntity.fromJson(airlineJson));
       expect(model.departureAirport, 'JFK');
       expect(model.arrivalAirport, 'LAX');
