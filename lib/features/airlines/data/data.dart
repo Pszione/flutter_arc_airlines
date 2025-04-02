@@ -1,0 +1,1 @@
+export 'model/airline_faker.dart';
