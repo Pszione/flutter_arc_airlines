@@ -24,6 +24,10 @@ class FlightInfoModel extends Equatable {
     required this.arrivalTime,
   });
 
+  String getAirport(bool isDeparture) => isDeparture ? departureAirport : arrivalAirport;
+  DateTime getFlightTime(bool isDeparture) =>
+      isDeparture ? departureTime.toLocal() : arrivalTime.toLocal();
+
   @override
   List<Object?> get props => [
     flightNumber,
