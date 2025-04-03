@@ -26,6 +26,7 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: context.colorScheme.primary,
+        surfaceTintColor: Colors.transparent,
         title: Text('Hello World!'),
       ),
       body: Stack(
@@ -44,6 +45,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 Container(
                   margin: EdgeInsets.symmetric(horizontal: defaultPadding),
                   child: Card(
+                    surfaceTintColor: Colors.transparent,
                     child: ListTile(
                       title: Text(
                         'Confirmation Code',
@@ -76,6 +78,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           padding: EdgeInsets.all(defaultPadding),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               FlightInfoColumn.departure(flight: flightInfo1),
                               Icon(Icons.arrow_forward, size: 42),
@@ -90,6 +93,7 @@ class _MyHomePageState extends State<MyHomePage> {
                             style: ElevatedButton.styleFrom(
                               backgroundColor: context.colorScheme.primary,
                               foregroundColor: context.colorScheme.onPrimary,
+                              textStyle: context.textTheme.titleMedium!.weightBold(),
                               minimumSize: const Size.fromHeight(50),
                             ),
                             onPressed: () {},
