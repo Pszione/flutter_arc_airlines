@@ -17,3 +17,5 @@ testCoverage:
 testCoverageReport:
   html:
     - genhtml coverage/lcov.info -o coverage/html
+
+buildRunner: $dart run build_runner build --delete-conflicting-outputs
