@@ -12,6 +12,8 @@ class FlightInfoModel extends Equatable {
   final AirlineEntity airline;
   final String departureAirport; // TODO: should entity with business logic
   final String arrivalAirport; // TODO: should entity with business logic
+  final AirportTerminalEntity? departureTerminal;
+  final AirportTerminalEntity? arrivalTerminal;
   final DateTime departureTime; // TODO: timezones?
   final DateTime arrivalTime; // TODO: timezones?
 
@@ -20,6 +22,8 @@ class FlightInfoModel extends Equatable {
     required this.airline,
     required this.departureAirport,
     required this.arrivalAirport,
+    required this.departureTerminal,
+    required this.arrivalTerminal,
     required this.departureTime,
     required this.arrivalTime,
   });
@@ -27,6 +31,8 @@ class FlightInfoModel extends Equatable {
   String getAirport(bool isDeparture) => isDeparture ? departureAirport : arrivalAirport;
   DateTime getFlightTime(bool isDeparture) =>
       isDeparture ? departureTime.toLocal() : arrivalTime.toLocal();
+  AirportTerminalEntity? getTerminal(bool isDeparture) =>
+      isDeparture ? departureTerminal : arrivalTerminal;
 
   @override
   List<Object?> get props => [

@@ -16,6 +16,23 @@ abstract class FlightInfoFaker {
     ),
     departureAirport: _faker.stringFromWords(3),
     arrivalAirport: _faker.stringFromWords(3),
+    departureTerminal: AirportTerminalEntity(
+      name: _faker.randomGenerator.integer(30, min: 1).toString(),
+      gate:
+          _faker.randomGenerator.boolean()
+              ? _faker.randomGenerator.integer(250, min: 1).toString()
+              : null,
+    ),
+    arrivalTerminal: AirportTerminalEntity(
+      name:
+          _faker.randomGenerator.boolean()
+              ? _faker.randomGenerator.integer(30, min: 1).toString()
+              : null,
+      gate:
+          (_faker.randomGenerator.boolean() && _faker.randomGenerator.boolean())
+              ? _faker.randomGenerator.integer(250, min: 1).toString()
+              : null,
+    ),
     departureTime: _faker.date.dateTime(),
     arrivalTime: _faker.date.dateTime(),
   );

@@ -14,16 +14,30 @@ FlightInfoModel _$FlightInfoModelFromJson(Map<String, dynamic> json) =>
       airline: AirlineEntity.fromJson(json['airline'] as Map<String, dynamic>),
       departureAirport: json['departureAirport'] as String,
       arrivalAirport: json['arrivalAirport'] as String,
+      departureTerminal:
+          json['departureTerminal'] == null
+              ? null
+              : AirportTerminalEntity.fromJson(
+                json['departureTerminal'] as Map<String, dynamic>,
+              ),
+      arrivalTerminal:
+          json['arrivalTerminal'] == null
+              ? null
+              : AirportTerminalEntity.fromJson(
+                json['arrivalTerminal'] as Map<String, dynamic>,
+              ),
       departureTime: DateTime.parse(json['departureTime'] as String),
       arrivalTime: DateTime.parse(json['arrivalTime'] as String),
     );
 
 Map<String, dynamic> _$FlightInfoModelToJson(FlightInfoModel instance) =>
     <String, dynamic>{
-      'flightNumber': instance.flightNumber.toJson(),
-      'airline': instance.airline.toJson(),
+      'flightNumber': instance.flightNumber,
+      'airline': instance.airline,
       'departureAirport': instance.departureAirport,
       'arrivalAirport': instance.arrivalAirport,
+      'departureTerminal': instance.departureTerminal,
+      'arrivalTerminal': instance.arrivalTerminal,
       'departureTime': instance.departureTime.toIso8601String(),
       'arrivalTime': instance.arrivalTime.toIso8601String(),
     };
