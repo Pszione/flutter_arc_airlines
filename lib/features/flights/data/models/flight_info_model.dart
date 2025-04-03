@@ -31,6 +31,7 @@ class FlightInfoModel extends Equatable {
   String getAirport(bool isDeparture) => isDeparture ? departureAirport : arrivalAirport;
   DateTime getFlightTime(bool isDeparture) =>
       isDeparture ? departureTime.toLocal() : arrivalTime.toLocal();
+  DateTime getFlightBoardingTime() => departureTime.subtract(const Duration(minutes: 45));
   AirportTerminalEntity? getTerminal(bool isDeparture) =>
       isDeparture ? departureTerminal : arrivalTerminal;
 

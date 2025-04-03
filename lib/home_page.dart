@@ -88,15 +88,59 @@ class _MyHomePageState extends State<MyHomePage> {
                         ),
                         Divider(height: 0),
                         Padding(
+                          padding: EdgeInsets.symmetric(
+                            horizontal: defaultPadding,
+                          ).copyWith(top: 16.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              // TODO: use Internationalization for conversion
+                              Builder(
+                                builder: (context) {
+                                  final boardingTime = flightInfo1.getFlightBoardingTime();
+
+                                  return Column(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      Text(
+                                        // TODO: use Internationalization for conversion
+                                        '${boardingTime.hour}:${boardingTime.minute}',
+                                        style:
+                                            context.textTheme.headlineMedium!
+                                                .copyWith(height: 1)
+                                                .weightBold(),
+                                      ),
+                                      Text('Boarding Time', style: context.textTheme.titleSmall),
+                                    ],
+                                  );
+                                },
+                              ),
+                              Column(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Text(
+                                    flightInfo1.getTerminal(true)?.gate ?? '-',
+                                    style:
+                                        context.textTheme.headlineMedium!
+                                            .copyWith(height: 1)
+                                            .weightBold(),
+                                  ),
+                                  Text('Boarding Gate', style: context.textTheme.titleSmall),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ),
+                        Padding(
                           padding: const EdgeInsets.all(16.0),
                           child: ElevatedButton(
+                            onPressed: () {},
                             style: ElevatedButton.styleFrom(
                               backgroundColor: context.colorScheme.primary,
                               foregroundColor: context.colorScheme.onPrimary,
                               textStyle: context.textTheme.titleMedium!.weightBold(),
                               minimumSize: const Size.fromHeight(50),
                             ),
-                            onPressed: () {},
                             child: Text('See Boarding Pass'),
                           ),
                         ),
@@ -126,6 +170,7 @@ class FlightInfoColumn extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final flightTime = flight.getFlightTime(isDeparture);
+    final flightTerminal = flight.getTerminal(isDeparture);
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -147,8 +192,7 @@ class FlightInfoColumn extends StatelessWidget {
           style: context.textTheme.bodyMedium!.toColor(context.theme.dividerColor),
         ),
         Text(
-          // TODO: use Internationalization for conversion
-          'Terminal 24',
+          'Terminal ${flightTerminal?.name ?? '-'}',
           style: context.textTheme.bodyMedium!.toColor(context.theme.dividerColor),
         ),
       ],
