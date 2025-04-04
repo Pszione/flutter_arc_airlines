@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 
 import '../../features/network_experiments/data/data.dart';
+import '../core.dart';
 import '../https/https.dart';
 
 GetIt get di => GetIt.instance;
@@ -12,6 +13,7 @@ abstract class DependencyInjection {
 
     await _registerServices();
     await _registerDatasources();
+    await _registerGlobalControllers();
   }
 
   ///
@@ -26,5 +28,9 @@ abstract class DependencyInjection {
   static Future<void> _registerDatasources() async {
     di.registerLazySingleton<JsonPlaceholderDatasource>(() => JsonPlaceholderDatasource(di()));
     di.registerLazySingleton<RequestResDatasource>(() => RequestResDatasource(di()));
+  }
+
+  static Future<void> _registerGlobalControllers() async {
+    di.registerLazySingleton<ThemeCubit>(() => ThemeCubit());
   }
 }
