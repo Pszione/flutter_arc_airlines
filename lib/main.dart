@@ -1,8 +1,17 @@
 import 'package:flutter/material.dart';
 
+import 'core/core.dart';
+import 'features/network_experiments/data/data.dart';
 import 'home_page.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await DependencyInjection.init();
+
+  di<JsonPlaceholderDatasource>().testApiCalls();
+  di<RequestResDatasource>().testApiCalls();
+
   runApp(const MyApp());
 }
 
