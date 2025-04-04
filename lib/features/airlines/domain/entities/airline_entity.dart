@@ -19,6 +19,14 @@ class AirlineEntity extends Equatable {
     this.country,
   });
 
+  factory AirlineEntity.empty() =>
+      const AirlineEntity(
+        id: '',
+        name: '',
+        code: '',
+        country: null,
+      );
+
   @override
   List<Object?> get props => [id, name, code, country];
 

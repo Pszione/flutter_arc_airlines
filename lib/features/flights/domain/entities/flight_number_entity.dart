@@ -10,6 +10,8 @@ class FlightNumberEntity with EquatableMixin {
 
   const FlightNumberEntity({required this.airlineCode, required this.value});
 
+  factory FlightNumberEntity.empty() => const FlightNumberEntity(airlineCode: null, value: '');
+
   @override
   List<Object?> get props => [airlineCode, value];
 

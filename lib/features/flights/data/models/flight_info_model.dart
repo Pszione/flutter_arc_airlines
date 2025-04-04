@@ -28,6 +28,17 @@ class FlightInfoModel extends Equatable {
     required this.arrivalTime,
   });
 
+  factory FlightInfoModel.empty() => FlightInfoModel(
+    flightNumber: FlightNumberEntity.empty(),
+    airline: AirlineEntity.empty(),
+    departureAirport: '',
+    arrivalAirport: '',
+    departureTerminal: null,
+    arrivalTerminal: null,
+    departureTime: DateTime.now(),
+    arrivalTime: DateTime.now(),
+  );
+
   String getAirport(bool isDeparture) => isDeparture ? departureAirport : arrivalAirport;
   DateTime getFlightTime(bool isDeparture) =>
       isDeparture ? departureTime.toLocal() : arrivalTime.toLocal();
