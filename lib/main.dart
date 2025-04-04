@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'core/core.dart';
 import 'features/network_experiments/data/data.dart';
@@ -40,11 +41,18 @@ class MyApp extends StatelessWidget {
       ),
     );
 
-    return MaterialApp(
-      title: 'Arc Airlines',
-      theme: themeLight,
-      darkTheme: themeDark,
-      home: const MyHomePage(),
+    return BlocBuilder<ThemeCubit, ThemeState>(
+      bloc: di<ThemeCubit>(),
+      builder: (context, state) {
+        return MaterialApp(
+          title: 'Arc Airlines',
+          theme: themeLight,
+          darkTheme: themeDark,
+          themeMode: state.themeMode,
+          builder: (context, child) => GlobalBlocInjection(child: child),
+          home: const MyHomePage(),
+        );
+      },
     );
   }
 }
