@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'core/core.dart';
 import 'features/network_experiments/data/data.dart';
-import 'home_page.dart';
+import 'features/home/presentation/ui/home_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

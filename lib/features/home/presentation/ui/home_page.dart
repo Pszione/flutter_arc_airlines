@@ -1,9 +1,10 @@
 import 'package:faker/faker.dart' show Faker; // TODO
 import 'package:flutter/material.dart';
-import 'package:flutter_arc_airlines/core/core.dart';
 
-import 'core/ui/ui.dart';
-import 'features/flights/data/data.dart';
+import '../../../../core/core.dart';
+import '../../../../core/ui/ui.dart';
+import '../../../flights/data/data.dart';
+import '../../home_imports.dart';
 
 final FlightInfoModel flightInfo1 = FlightInfoFaker.call();
 final FlightInfoModel flightInfo2 = FlightInfoFaker.call();
@@ -152,89 +153,6 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
           ),
         ],
-      ),
-    );
-  }
-}
-
-class FlightInfoColumn extends StatelessWidget {
-  final FlightInfoModel flight;
-  final bool isDeparture;
-
-  const FlightInfoColumn({super.key, required this.flight, required this.isDeparture});
-
-  const FlightInfoColumn.departure({super.key, required this.flight}) : isDeparture = true;
-
-  const FlightInfoColumn.arrival({super.key, required this.flight}) : isDeparture = false;
-
-  @override
-  Widget build(BuildContext context) {
-    final flightTime = flight.getFlightTime(isDeparture);
-    final flightTerminal = flight.getTerminal(isDeparture);
-
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          flight.getAirport(isDeparture),
-          style: context.textTheme.headlineMedium!.copyWith(height: 1).weightBold(),
-        ),
-        Text(flight.flightNumber.value, style: context.textTheme.titleSmall),
-        Gap(8),
-        Text(
-          // TODO: use Internationalization for conversion
-          '${flightTime.hour}:${flightTime.minute}',
-          style: context.textTheme.titleMedium!.weightSemiBold(),
-        ),
-        Text(
-          // TODO: use Internationalization for conversion
-          '${flightTime.month}/${flightTime.day}/${flightTime.year}',
-          style: context.textTheme.bodyMedium!.toColor(context.theme.dividerColor),
-        ),
-        Text(
-          'Terminal ${flightTerminal?.name ?? '-'}',
-          style: context.textTheme.bodyMedium!.toColor(context.theme.dividerColor),
-        ),
-      ],
-    );
-  }
-}
-
-class CustomChip extends StatelessWidget {
-  final String text;
-  final Color? color, textColor;
-  final EdgeInsetsGeometry? padding;
-  final double? paddingMultiplier;
-
-  const CustomChip({
-    super.key,
-    required this.text,
-    this.color,
-    this.textColor,
-    this.padding,
-    this.paddingMultiplier,
-  }) : assert(
-         padding == null || paddingMultiplier == null,
-         'You can user or padding or paddingMultiplier, but not both',
-       ),
-       assert(
-         paddingMultiplier == null || paddingMultiplier > 0,
-         'paddingMultiplier must be a positive number',
-       );
-
-  @override
-  Widget build(BuildContext context) {
-    return Material(
-      color: color,
-      shape: const StadiumBorder(),
-      child: Padding(
-        padding:
-            padding ??
-            EdgeInsets.symmetric(
-              vertical: 4.0 * (paddingMultiplier ?? 1),
-              horizontal: 8.0 * (paddingMultiplier ?? 1),
-            ),
-        child: Text(text, style: TextStyle(color: textColor).weightSemiBold()),
       ),
     );
   }
