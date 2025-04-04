@@ -1,5 +1,6 @@
 import 'package:faker/faker.dart' show Faker; // TODO
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/core.dart';
 import '../../../../core/ui/ui.dart';
@@ -29,6 +30,18 @@ class _MyHomePageState extends State<MyHomePage> {
         backgroundColor: context.colorScheme.primary,
         surfaceTintColor: Colors.transparent,
         title: Text('Hello World!'),
+        actions: [
+          BlocBuilder<ThemeCubit, ThemeState>(
+            builder: (context, state) {
+              final isDarkMode = state.themeMode == ThemeMode.dark;
+              return IconButton(
+                icon: Icon(isDarkMode ? Icons.wb_sunny_outlined : Icons.nightlight_round),
+                onPressed: () => context.read<ThemeCubit>().toggleTheme(),
+                tooltip: 'Toggle light/dark theme',
+              );
+            },
+          ),
+        ],
       ),
       body: Stack(
         children: [
